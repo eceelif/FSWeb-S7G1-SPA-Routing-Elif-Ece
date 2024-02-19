@@ -1,36 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from "react";
+import Home from "./components/Home";
+import ListItems from "./components/listing/ListItems";
+import data from "./FetchedDatas/tmdb_Trending_All_Request";
 
-import KaydedilenlerListesi from './Filmler/KaydedilenlerListesi';
+// import react route components
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-export default function App () {
-  const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
-  const [movieList, setMovieList] = useState([]);
-
-  useEffect(() => {
-    const FilmleriAl = () => {
-      axios
-        .get('http://localhost:5001/api/filmler') // Burayı Postman'le çalışın
-        .then(response => {
-          // Bu kısmı log statementlarıyla çalışın
-          // ve burdan gelen response'u 'movieList' e aktarın
-        })
-        .catch(error => {
-          console.error('Sunucu Hatası', error);
-        });
-    }
-    FilmleriAl();
-  }, []);
-
-  const KaydedilenlerListesineEkle = id => {
-    // Burası esnek. Aynı filmin birden fazla kez "saved" e eklenmesini engelleyin
-  };
+export default function App() {
 
   return (
-    <div>
-      <KaydedilenlerListesi list={[ /* Burası esnek */]} />
+    <Router>
+      <div>
+        <Link to="/">Home</Link>
+        
+        {
+          Object.keys(data.trend_type).map((item, index) => {
+            return (
+              <Link key={index} to = { `/lists/${data.trend_type[item]}`}> {item} </Link>
+            )
+          })
+        }
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/lists/:name">
+            <ListItems />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
 
-      <div>Bu Div'i kendi Routelarınızla değiştirin</div>
-    </div>
+    // <BrowserRouter >
+    //   <div>
+    //     <KaydedilenlerListesi list={[ /* Burası esnek */]} />
+    //<KaydedilenlerListesi list={[ /* Burası esnek */]} name={'trend_listesi'} />
+    //     <div>Bu Div'i kendi Routelarınızla değiştirin</div>
+    //   </div>
+    //   <BrowserRouter />
   );
 }

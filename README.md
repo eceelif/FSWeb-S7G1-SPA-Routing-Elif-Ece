@@ -67,3 +67,13 @@ Eğer Görev 1 ve 2'yi tamamladıktan sonra bu göreve geçebilirsin.
 #### Kaydedilen Film `Link` lerini `NavLink`e dönüştürün
 
 * [ ] Navlink
+####  https://developer.themoviedb.org/reference/discover-movie
+#### api_key : eec2673ba714443e74178f87ba17d88d
+#### API Read Access Token : eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZWMyNjczYmE3MTQ0NDNlNzQxNzhmODdiYTE3ZDg4ZCIsInN1YiI6IjYzYThjMzc3MGYyMWM2MDA3ODcxNTJmMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mvF5XrBT7B0AJwPJekwVF7QoSkUBWfsuy9dTE90m9v8
+
+
+Yapılacaklar;
+
+#### ek detay sayfası için 3 farklı component oluşturun.
+#### bu componentleri az da olsa stil ekleyin.
+#### bu componentlerin içini alakalı veriler ile (api üzerinden gelen) 4 tane field ekleyin 1 tanesi resim olamalı.
