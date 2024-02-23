@@ -1,43 +1,77 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import data from "./../../FetchedDatas/tmdb_Trending_All_Request";
-import TrendDetail from "../TrendDetail";
-const ListItems = (props) => {
-  const [trendList, setTrendList] = useState({});
-  const [prevTrendList, setPrevTrendList ] = useState('');
+import MovieDetail from "../MovieDetails";
+import PersonDetail from "../PersonDetails";
+import TvDetail from "../TvDetails";
 
+const ListItems = (props) => {
+  const [movieList, setMovieList] = useState({});
+  const [prevMovieList, setPrevMovieList] = useState('');
   const params = useParams();
-   if(params.name != prevTrendList ){
-     setPrevTrendList(params.name)
-   }
-  //setPrevTrendList(params.name);
-  //console.log(params);
+
+  if (params.name !== prevMovieList) {
+    setPrevMovieList(params.name);
+  }
 
   useEffect(() => {
-
-    const getTrendList = async (trend_name) => {
-      let result = await data.getTrendRequest(trend_name, data.time_window.week, 1);
-      console.log(result)
-      setTrendList(result);
+    const getMovieList = async (trend_name) => {
+      try {
+        let result = await data.getTrendRequest(trend_name, data.time_window.week, 1);
+        console.log(result);
+        setMovieList(result);
+      } catch (error) {
+        console.error("Error fetching movie list:", error);
+      }
     };
 
-    getTrendList(prevTrendList);
-    
-  },[prevTrendList]);
+    getMovieList(prevMovieList);
+  }, [prevMovieList]);
 
   return (
     <>
-      {
-      trendList.results ? 
-      (
-        trendList.results.map((item, index) => {
-          return (
-            <TrendDetail key={index} original_title={item.name || item.title} />
-          );
+      {movieList.results ? (
+        movieList.results.map((item, index) => {
+          if (item.media_type === "movie") {
+            return (
+              <MovieDetail
+                key={index}
+                original_title={item.name || item.title}
+                media_type={item.media_type}
+                original_language={item.original_language}
+                special_info={item.special_info}
+              />
+            );
+          } else if (item.media_type === "person") {
+            return (
+              <PersonDetail
+                key={index}
+                original_title={item.name || item.title}
+                media_type={item.media_type}
+                name={item.name}
+                profile_path={item.profile_path}
+                special_info={item.special_info}
+                popularity={item.popularity}
+              />
+            );
+          }
+          else if (item.media_type === "tv") {
+            return (
+              <TvDetail
+                key={index}
+                original_title={item.name || item.title}
+                media_type={item.media_type}
+                name={item.name}
+                backdrop_path={item.backdrop_path}
+                popularity={item.popularity}
+                origin_country={item.origin_country}
+                overview={item.overview}
+              />
+            );
+          }
+          return null; // Diğer durumlar için null döndür
         })
-      ) 
-      : 
-      (
+      ) : (
         <p>Yükleniyor</p>
       )}
     </>

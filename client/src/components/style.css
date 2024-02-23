@@ -1,0 +1,50 @@
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: rgb(187, 57, 10); 
+  }
+  p{
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: rgb(14, 130, 25); 
+  }
+  #media1 {
+    color: green; 
+    font-size: 16px;
+    
+  }
+  #media2 {
+    color: rgb(180, 17, 64); 
+    font-size: 16px;
+  }
+  #media3 {
+    color: rgb(29, 112, 160); 
+    font-size: 16px;
+  }
+  
+  /* Özel Bilgi için ayrı stil */
+  h1 + h1 {
+    color: #ff6600; /* Özel Bilgi için farklı bir renk */
+  }
+  
+  /* Media Tipi için ayrı stil */
+  h2:nth-child(3) {
+    color: #0066cc; /* Media Tipi için farklı bir renk */
+  }
+  
+  /* Ana Dil için ayrı stil */
+  h2:nth-child(4) {
+    color: #009900; /* Ana Dil için farklı bir renk */
+  }
+  img {
+    width: 100%; /* Resmi içerdiği container'a genişletir */
+    height: auto; /* Orantılı olarak yüksekliği otomatik ayarlar */
+    max-width: 300px; /* Opsiyonel: Maksimum genişlik belirleme */
+    max-height: 300px; /* Opsiyonel: Maksimum yükseklik belirleme */
+  }
